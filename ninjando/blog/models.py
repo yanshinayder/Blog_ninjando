@@ -43,5 +43,17 @@ class Blogcategory(MPTTModel):
         name = models.CharField("Tag", max_length=50, unique=True, null=True)
         slug = models.SlugField(max_length=100, blank=True, null=True)
 
-        class Meta:
+    class Meta:
+        verbose_name = "Tag"
+        verbose_name_plural = "Tags"
+
+    def __str__(self):
+        return self.name
+
+class Post(models.Model):
+
+    author = models.ForeignKey (
+        User,
+        verbose_name ="Author",
+        on_delete=models.CASCADE )
                 
