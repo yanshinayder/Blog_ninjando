@@ -2,10 +2,11 @@ from datetime import datetime
 
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models.deletion import CASCADE
+from django.db.models.deletion import CASCADE, SET_NULL
 from django.db.models.fields import SlugField
 from django.urls import reverse
 from django.utils import timezone
+from django.utils.translation import to_language
 from mptt.models import MPTTModel, TreeForeignKey
 from django.dispatch import receiver
 from django.db.models.signals import post_save
@@ -56,4 +57,23 @@ class Post(models.Model):
         User,
         verbose_name ="Author",
         on_delete=models.CASCADE )
-                
+
+    title = models.CharField('Tema', max_length=500)    
+    mini_text = models.TextField('Resume', max_length=5000)
+    text = models.TextField('full content', max_length=10000000)
+    created_date = models.DateTimeField('Creation Date', auto_now_add=True )    
+    published_date = models.DateTimeField(
+        "Publication date"
+        default=timezone.now,
+        blank=True,
+        null=True
+    )        
+    image = models.ImageField("Image"), upload_to="blog/", blank=True)
+    tag = models.ManyToManyField(Tag, verbose_name="Ter", blank=True)
+    category = models.ForeignKey(
+        Blogcategory,
+        verbose_name="Category"
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL
+    )
