@@ -3,7 +3,7 @@ from datetime import datetime
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.deletion import CASCADE, SET_NULL
-from django.db.models.fields import SlugField
+from django.db.models.fields import  SlugField
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import to_language
@@ -67,13 +67,7 @@ class Post(models.Model):
         default=timezone.now,
         blank=True,
         null=True
-    )        
+        )        
     image = models.ImageField("Image"), upload_to="blog/", blank=True)
     tag = models.ManyToManyField(Tag, verbose_name="Ter", blank=True)
-    category = models.ForeignKey(
-        Blogcategory,
-        verbose_name="Category"
-        blank=True,
-        null=True,
-        on_delete=models.SET_NULL
-    )
+    
