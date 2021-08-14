@@ -22,7 +22,7 @@ class Post(Schema):
     created_date: datetime  
     published_date: datetime  
     image: str
-    # tag: List[int] = None
+    tag: List[Tag] = None
     category_id: int
     published: bool
     viewed: int
