@@ -48,8 +48,8 @@ class Post(models.Model):
         default= timezone.now,
         blank=True,
         null=True,
-    
-    image = models.ImageField("Image"), upload_to="blog/", blank=True)
+    )
+    image = models.ImageField("Изображение", upload_to="blog/", blank=True)
     tag = models.ManyToManyField(Tag, verbose_name="Ter", blank=True)
     category = models.ForeignKey(
         Category,
@@ -84,6 +84,7 @@ class Comment(models.Model ):
     post = models.ForeignKey(
         Post, verbose_name="News", related_name="Comments", on_delete=models.CASCADE
     )
+    text = models.TextField("Message")
     parent = models.ForeignKey(
         "self",
         verbose_name="Parent Comment",
