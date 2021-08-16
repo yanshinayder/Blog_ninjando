@@ -11,6 +11,7 @@ class Category(Schema):
 class Tag(Schema):
     id: int
     name: str
+    author_id: int
 
 
 class Post(Schema):
