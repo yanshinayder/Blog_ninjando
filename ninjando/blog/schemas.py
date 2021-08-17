@@ -5,7 +5,7 @@ from ninja import Schema
 class Category(Schema):
     id: int
     name: str
-    parent_id: int = None
+    
 
 
 class Tag(Schema):
