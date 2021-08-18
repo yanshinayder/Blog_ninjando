@@ -5,13 +5,18 @@ from ninja import Schema
 class Category(Schema):
     id: int
     name: str
-    
+
+
+
+
+class CategoryParent(Category):
+    parent: Category = None
 
 
 class Tag(Schema):
     id: int
     name: str
-    author_id: int
+    
 
 
 class Post(Schema):
@@ -24,14 +29,17 @@ class Post(Schema):
     published_date: datetime  
     image: str
     tag: List[Tag] = None
-    category_id: int
+    category: Category
     published: bool
     viewed: int
-    
 
-class Comment(Schema):
-    id: int
-    user_id: int = None
+class CreateComment(Schema):
     post_id: int = None
     text: str
     parent_id: int = None
+    user_id: int = None
+
+class Comment(CreateComment):
+    id: int
+    
+    

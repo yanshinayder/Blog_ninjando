@@ -6,14 +6,21 @@ from typing import List
 
 api = NinjaAPI()
 
-@api.get("/category", response=List[schemas.Category])
-def gat_categoty(request):
+@api.get("/category", response=List[schemas.CategoryParent])
+def get_categoty(request):
     return models.Category.objects.filter(published=True)
 
 @api.get("/post", response=List[schemas.Post])
-def gat_list_post(request):
+def get_list_post(request):
     return models.Post.objects.filter(published=True)    
 
-@api.get("/post/{post_pk}", response = List[schemas.Post])
-def gat_single_post(request, post_pk: int):
-    return get_object_or_404(models.Post, published=True)
+@api.get("/post/{post_pk}", response=schemas.Post)
+def get_single_post(request, post_pk: int):
+    return get_object_or_404(models.Post, published=True)        
+
+
+@api.post("/comment", response=schemas.Comment)    
+def create_comment(request, comment: schemas.CreateComment):
+    return models.Comment.objects.create(**comment.dict())
+
+

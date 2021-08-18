@@ -84,7 +84,7 @@ class Comment(models.Model ):
     post = models.ForeignKey(
         Post, verbose_name="News", related_name="Comments", on_delete=models.CASCADE
     )
-    text = models.TextField("Message")
+    text = models.TextField("Message", default='')
     parent = models.ForeignKey(
         "self",
         verbose_name="Parent Comment",
